@@ -12,7 +12,7 @@ so i used google spreadsheet and put this script for the web app
 
 // This will set CORS headers... maybe, idk.
 
-var output = ContentService.createTextOutput(JSON.stringify({ 'result': 'success' })); output.setMimeType(ContentService.MimeType.JSON); output.setHeader('Access-Control-Allow-Origin', '*'); output.setHeader('Access-Control-Allow-Methods', 'POST'); output.setHeader('Access-Control-Allow-Headers', 'Content-Type');`
+var output = ContentService.createTextOutput(JSON.stringify({ 'result': 'success' })); output.setMimeType(ContentService.MimeType.JSON); output.setHeader('Access-Control-Allow-Origin', '*'); output.setHeader('Access-Control-Allow-Methods', 'POST'); output.setHeader('Access-Control-Allow-Headers', 'Content-Type'); `
 
 um u can replace the google spreadsheet api url on the fetch function in ✨Decollector.js✨ file...
 
