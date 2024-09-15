@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Gurlfren :)</title>
+    <link rel="stylesheet" href="css/valentine.css" />
+  </head>
+  <body>
+    <div id="valentineQuestion"><b>Will you go out with me?</b></div>
+    <button class="answerButton" onclick="location.href='thankyou.html'">
+      Yes
+    </button>
+    <button class="answerButton" id="noButton">I no no wanna o(╥﹏╥)o</button>
+    <br />
+    <img src="cat.gif" alt="cat asking question" class="responsive" />
+
+    <script>
+      // Initialize the count if it doesn't exist.
+      if (!localStorage.getItem('noCount')) {
+        localStorage.setItem('noCount', 0);
+      }
+
+      document.getElementById("noButton").addEventListener("click", function () {
+        // Increase the NO_Count on the local storage created.
+        let noCount = parseInt(localStorage.getItem('noCount'));
+        noCount += 1;
+        localStorage.setItem('noCount', noCount);
+
+        // Sends the count to the google sheet with or witout bypass... just hope the bypass works. or not 
+        sendNoCountToGoogleSheet(noCount);
+
+        // Moves your font to this place don't worry it will work like it should (prolly not). 
+        var yesButton = document.querySelector('button[onclick*="thankyou.html"]');
+        var currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
+        yesButton.style.fontSize = currentFontSize + 10 + "px"; 
+      });
+    //Just fucking fetch alright.
+      function sendNoCountToGoogleSheet(noCount) {
+        fetch('https://script.google.com/macros/s/AKfycbz9ej4pOT-XDVCgxa1OhDoK8UWpPABfwo4hrp_iUjGbot49PwtP23_jDlSXEVB7brUq/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ noCount: noCount }),
+          mode: 'no-cors'
+        })
+        .then(response => {
+          console.log('Success:', response);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      }
+    </script>
+  </body>
+</html>
